@@ -1,0 +1,15 @@
+{
+  "name": "libarchive-wasm",
+  "version": "1.0.0",
+  "private": true,
+  "description": "",
+  "keywords": [
+
+  ],
+  "main": "index.js",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

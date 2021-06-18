@@ -5,7 +5,8 @@
     "start": "parcel serve browser/index.html"
   },
   "dependencies": {
-    "libarchive-wasm": "file:.."
+    "libarchive-wasm": "file:..",
+    "minlink": "^2.0.1"
   },
   "devDependencies": {
     "parcel": "^2.0.0-beta.2"

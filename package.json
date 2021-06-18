@@ -1,10 +1,17 @@
 {
-  "private": true,
   "name": "libarchive-wasm",
   "version": "1.0.0",
-  "description": "",
-  "license": "UNLICENSED",
-  "author": "",
+  "description": "A WASM version of libarchive API",
+  "license": "MIT",
+  "author": "ofk <ofkjpn+npm@gmail.com> (https://github.com/ofk/)",
+  "homepage": "https://github.com/ofk/libarchive-wasm#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:ofk/libarchive-wasm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ofk/libarchive-wasm/issues"
+  },
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -40,7 +47,6 @@
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.4"
   },
-  "keywords": [],
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix --ext .js,.jsx,.ts,.tsx",

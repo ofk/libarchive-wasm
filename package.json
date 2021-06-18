@@ -10,8 +10,10 @@
     "build": "tsc -p tsconfig.build.json",
     "format": "npm-run-all -p format:** -s prettier:format",
     "format:package-json": "prettier-package-json --write",
+    "format:scripts": "npm run lint:scripts -- --fix",
     "lint": "run-p lint:** prettier:lint",
     "lint:package-json": "prettier-package-json -l",
+    "lint:scripts": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:typecheck": "tsc",
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -30,6 +32,10 @@
   },
   "keywords": [],
   "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix --ext .js,.jsx,.ts,.tsx",
+      "prettier --write"
+    ],
     "package.json": "prettier-package-json --write",
     "*.{md,json,html}": "prettier --write"
   }

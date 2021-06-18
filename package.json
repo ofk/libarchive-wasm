@@ -11,6 +11,7 @@
     "format:package-json": "prettier-package-json --write",
     "lint": "run-p lint:** prettier:lint",
     "lint:package-json": "prettier-package-json -l",
+    "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier:format": "npm run prettier:lint -- --write",
     "prettier:lint": "prettier . --check"

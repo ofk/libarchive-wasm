@@ -7,10 +7,12 @@
   "author": "",
   "main": "index.js",
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "format": "npm-run-all -p format:** -s prettier:format",
     "format:package-json": "prettier-package-json --write",
     "lint": "run-p lint:** prettier:lint",
     "lint:package-json": "prettier-package-json -l",
+    "lint:typecheck": "tsc",
     "prepare": "husky install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier:format": "npm run prettier:lint -- --write",

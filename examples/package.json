@@ -1,6 +1,9 @@
 {
   "private": true,
   "name": "examples",
+  "scripts": {
+    "start": "parcel serve browser/index.html"
+  },
   "dependencies": {
     "libarchive-wasm": "file:.."
   },

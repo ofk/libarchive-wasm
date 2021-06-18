@@ -34,6 +34,26 @@ describe('ArchiveReader', () => {
     a.free();
   });
 
+  it('test.zip (forEach)', async () => {
+    const data = await readFile('./archives/example.zip');
+    const mod = await libarchiveWasm();
+    const a = new ArchiveReader(mod, new Int8Array(data));
+    const entries = [] as Record<string, unknown>[];
+    a.forEach((entry) => {
+      const pathname = entry.getPathname();
+      const entryData = /\.md/.test(pathname) ? entry.readData() : undefined;
+      entries.push({
+        filetype: entry.getFiletype(),
+        pathname,
+        size: entry.getSize(),
+        data: new TextDecoder().decode(entryData || undefined),
+        encrypted: entry.isEncrypted(),
+      });
+    });
+    expect(entries).toMatchSnapshot();
+    a.free();
+  });
+
   it('encrypted.zip', async () => {
     const data = await readFile('./archives/encrypted.zip');
     const mod = await libarchiveWasm();

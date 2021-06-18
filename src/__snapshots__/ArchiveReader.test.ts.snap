@@ -49,6 +49,55 @@ archives/archive/dir/image.png
 ]
 `;
 
+exports[`ArchiveReader test.zip (forEach) 1`] = `
+Array [
+  Object {
+    "data": "",
+    "encrypted": false,
+    "filetype": "Directory",
+    "pathname": "archive/",
+    "size": 0,
+  },
+  Object {
+    "data": "# archive
+
+\`\`\`
+archives/archive
+archives/archive/README.md
+archives/archive/dir
+archives/archive/dir/symlink
+archives/archive/dir/image.png
+\`\`\`
+",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "archive/README.md",
+    "size": 144,
+  },
+  Object {
+    "data": "",
+    "encrypted": false,
+    "filetype": "Directory",
+    "pathname": "archive/dir/",
+    "size": 0,
+  },
+  Object {
+    "data": "",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "archive/dir/symlink",
+    "size": 144,
+  },
+  Object {
+    "data": "",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "archive/dir/image.png",
+    "size": 1559,
+  },
+]
+`;
+
 exports[`ArchiveReader test.zip 1`] = `
 Array [
   Object {

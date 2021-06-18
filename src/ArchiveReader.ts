@@ -1,5 +1,6 @@
 /* eslint-disable no-underscore-dangle */
 import type { LibarchiveWasm } from './libarchiveWasm';
+import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 
 export class ArchiveReader {
   public libarchive: LibarchiveWasm;
@@ -72,5 +73,29 @@ export class ArchiveReader {
 
   isEntryEncrypted(ptr: number): boolean {
     return !!this.libarchive.entry_is_encrypted(ptr);
+  }
+
+  nextEntry(): ArchiveReaderEntry | null {
+    const entryPtr = this.nextEntryPointer();
+    if (entryPtr === 0) return null;
+    return new ArchiveReaderEntry(this, entryPtr);
+  }
+
+  forEach(fn: (entry: ArchiveReaderEntry) => unknown): void {
+    for (;;) {
+      const entry = this.nextEntry();
+      if (!entry) break;
+      fn(entry);
+      entry.free();
+    }
+  }
+
+  *entries(): Generator<ArchiveReaderEntry, void, unknown> {
+    for (;;) {
+      const entry = this.nextEntry();
+      if (!entry) break;
+      yield entry;
+      entry.free();
+    }
   }
 }

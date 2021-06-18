@@ -1,4 +1,7 @@
 {
   "private": true,
-  "name": "examples"
+  "name": "examples",
+  "dependencies": {
+    "libarchive-wasm": "file:.."
+  }
 }

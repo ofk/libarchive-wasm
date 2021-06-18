@@ -3,5 +3,8 @@
   "name": "examples",
   "dependencies": {
     "libarchive-wasm": "file:.."
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-beta.2"
   }
 }

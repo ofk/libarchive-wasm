@@ -1,20 +1,24 @@
 {
+  "private": true,
   "name": "libarchive-wasm",
   "version": "1.0.0",
-  "private": true,
   "description": "",
-  "keywords": [
-
-  ],
-  "main": "index.js",
-  "author": "",
   "license": "UNLICENSED",
+  "author": "",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "npm-run-all -p format:** -s prettier:format",
+    "format:package-json": "prettier-package-json --write",
+    "lint": "run-p lint:** prettier:lint",
+    "lint:package-json": "prettier-package-json -l",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier:format": "npm run prettier:lint -- --write",
+    "prettier:lint": "prettier . --check"
   },
   "devDependencies": {
     "npm-run-all": "^4.1.5",
     "prettier": "^2.3.1",
     "prettier-package-json": "^2.6.0"
-  }
+  },
+  "keywords": []
 }

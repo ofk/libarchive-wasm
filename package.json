@@ -16,7 +16,7 @@
     "lint:scripts": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:typecheck": "tsc",
     "prepare": "husky install",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "prettier:format": "npm run prettier:lint -- --write",
     "prettier:lint": "prettier . --check"
   },

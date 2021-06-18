@@ -5,7 +5,11 @@
   "description": "",
   "license": "UNLICENSED",
   "author": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "src"
+  ],
   "scripts": {
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
@@ -22,6 +26,7 @@
     "prettier:format": "npm run prettier:lint -- --write",
     "prettier:lint": "prettier . --check"
   },
+  "types": "dist/index.d.ts",
   "devDependencies": {
     "@ofk/eslint-config-recommend": "^3.1.0",
     "@types/jest": "^26.0.23",

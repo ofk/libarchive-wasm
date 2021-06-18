@@ -1,0 +1,23 @@
+[
+  "_archive_version_number",
+  "_archive_version_string",
+  "_archive_version_details",
+  "_archive_read_new_memory",
+  "_archive_read_new",
+  "_archive_read_support_filter_all",
+  "_archive_read_support_format_all",
+  "_archive_read_open_memory",
+  "_archive_read_next_entry",
+  "_archive_read_has_encrypted_entries",
+  "_archive_read_data",
+  "_archive_read_data_skip",
+  "_archive_read_add_passphrase",
+  "_archive_read_free",
+  "_archive_error_string",
+  "_archive_entry_filetype",
+  "_archive_entry_pathname_utf8",
+  "_archive_entry_size",
+  "_archive_entry_is_encrypted",
+  "_malloc",
+  "_free"
+]

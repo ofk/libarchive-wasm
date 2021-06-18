@@ -1,3 +1,5 @@
 coverage
 dist
+lib/build
+src/libarchive.js
 node_modules

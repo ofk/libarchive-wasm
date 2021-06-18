@@ -1,5 +1,7 @@
 import { readFile } from 'fs/promises';
 import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
+import { Worker } from 'worker_threads';
+import { wrap } from 'minlink/dist/node.mjs';
 
 (async () => {
   const data = await readFile('../../archives/example.zip');
@@ -19,5 +21,14 @@ import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
       console.log(result);
     }
     reader.free();
+  })();
+
+  await (async () => {
+    console.log('Extract (worker)');
+    const worker = new Worker('./worker.mjs');
+    const api = wrap(worker);
+    const results = await api.exec('extractAll', data);
+    console.log(results);
+    await api.terminate();
   })();
 })();

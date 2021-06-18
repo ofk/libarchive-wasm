@@ -1,5 +1,6 @@
 {
   "rules": {
+    "import/extensions": "off",
     "no-restricted-syntax": "off"
   }
 }

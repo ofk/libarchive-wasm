@@ -22,20 +22,22 @@ const toEntries = (a: ArchiveReader): Record<string, unknown>[] => {
   return entries;
 };
 
-describe('ArchiveReader', () => {
-  it('test.zip', async () => {
-    const data = await readFile('./archives/example.zip');
+const testExtract = (name: string, passphrase?: string): void => {
+  test(name, async () => {
+    const data = await readFile(`./archives/${name}`);
     const mod = await libarchiveWasm();
-    const a = new ArchiveReader(mod, new Int8Array(data));
+    const a = new ArchiveReader(mod, new Int8Array(data), passphrase);
     expect(a.hasEncryptedData()).toBe(null);
     const entries = toEntries(a);
     expect(entries).toMatchSnapshot();
-    expect(a.hasEncryptedData()).toBe(false);
+    expect(!!a.hasEncryptedData()).toBe(passphrase != null);
     a.free();
   });
+};
 
-  it('test.zip (forEach)', async () => {
-    const data = await readFile('./archives/example.zip');
+describe('ArchiveReader', () => {
+  test('deflate.zip (forEach)', async () => {
+    const data = await readFile('./archives/deflate.zip');
     const mod = await libarchiveWasm();
     const a = new ArchiveReader(mod, new Int8Array(data));
     const entries = [] as Record<string, unknown>[];
@@ -54,14 +56,20 @@ describe('ArchiveReader', () => {
     a.free();
   });
 
-  it('encrypted.zip', async () => {
-    const data = await readFile('./archives/encrypted.zip');
-    const mod = await libarchiveWasm();
-    const a = new ArchiveReader(mod, new Int8Array(data), 'Passw0rd!');
-    expect(a.hasEncryptedData()).toBe(null);
-    const entries = toEntries(a);
-    expect(entries).toMatchSnapshot();
-    expect(a.hasEncryptedData()).toBe(true);
-    a.free();
-  });
+  testExtract('deflate.zip');
+  testExtract('deflate-encrypted.zip', 'Passw0rd!');
+  testExtract('store.zip');
+
+  testExtract('a.tar');
+  testExtract('a.tar.bz2');
+  testExtract('a.tar.gz');
+  testExtract('a.tar.xz');
+
+  testExtract('bzip2.7z');
+  testExtract('lzma.7z');
+  testExtract('lzma2.7z');
+
+  testExtract('v4.rar');
+  testExtract('v4-encrypted.rar', 'Passw0rd!');
+  testExtract('v5.rar');
 });

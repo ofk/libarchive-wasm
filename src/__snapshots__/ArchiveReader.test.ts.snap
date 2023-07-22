@@ -638,5 +638,3 @@ archives/example/dir/image.png
   },
 ]
 `;
-
-exports[`ArchiveReader v5-encrypted.rar 1`] = `Array []`;

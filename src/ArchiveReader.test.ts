@@ -23,8 +23,8 @@ const toEntries = (a: ArchiveReader): Record<string, unknown>[] => {
 };
 
 describe('ArchiveReader', () => {
-  it('test.zip', async () => {
-    const data = await readFile('./archives/example.zip');
+  test('deflate.zip', async () => {
+    const data = await readFile('./archives/deflate.zip');
     const mod = await libarchiveWasm();
     const a = new ArchiveReader(mod, new Int8Array(data));
     expect(a.hasEncryptedData()).toBe(null);
@@ -34,8 +34,8 @@ describe('ArchiveReader', () => {
     a.free();
   });
 
-  it('test.zip (forEach)', async () => {
-    const data = await readFile('./archives/example.zip');
+  test('deflate.zip (forEach)', async () => {
+    const data = await readFile('./archives/deflate.zip');
     const mod = await libarchiveWasm();
     const a = new ArchiveReader(mod, new Int8Array(data));
     const entries = [] as Record<string, unknown>[];
@@ -54,8 +54,8 @@ describe('ArchiveReader', () => {
     a.free();
   });
 
-  it('encrypted.zip', async () => {
-    const data = await readFile('./archives/encrypted.zip');
+  test('deflate-encrypted.zip', async () => {
+    const data = await readFile('./archives/deflate-encrypted.zip');
     const mod = await libarchiveWasm();
     const a = new ArchiveReader(mod, new Int8Array(data), 'Passw0rd!');
     expect(a.hasEncryptedData()).toBe(null);

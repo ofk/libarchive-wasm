@@ -4,7 +4,7 @@ import { Worker } from 'worker_threads';
 import { wrap } from 'minlink/dist/node.mjs';
 
 (async () => {
-  const data = await readFile('../../archives/example.zip');
+  const data = await readFile('../../archives/deflate.zip');
 
   await (async () => {
     console.log('Extract (main)');

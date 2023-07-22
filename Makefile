@@ -8,7 +8,10 @@ build-docker:
 clean:
 	$(RM) src/libarchive.{js,wasm} lib/build/*
 
-create-archives: archives/example.zip archives/encrypted.zip
+create-archives: archives/deflate.zip archives/deflate-encrypted.zip
+
+clean-archives:
+	$(RM) -r archives/*
 
 src/libarchive.js: lib/build/libarchive.js
 	cp lib/build/libarchive.* src
@@ -16,18 +19,18 @@ src/libarchive.js: lib/build/libarchive.js
 lib/build/libarchive.js:
 	docker run -it -v $(PWD)/lib:/workdir libarchive-wasm-build ./build.bash
 
-archives/example.zip: archives/archive
-	cd archives/ && zip -r example.zip archive && cd ..
+archives/deflate.zip: archives/example
+	cd archives/ && zip -r -Z deflate deflate.zip example && cd ..
 
-archives/encrypted.zip: archives/archive
-	cd archives/ && zip -e --password=Passw0rd! -r encrypted.zip archive && cd ..
+archives/deflate-encrypted.zip: archives/example
+	cd archives/ && zip -e -Z deflate --password=Passw0rd! -r deflate-encrypted.zip example && cd ..
 
-archives/archive:
-	rm -rf archives/archive
-	mkdir -p archives/archive/dir
-	touch archives/archive/README.md
-	ln -s ../README.md archives/archive/dir/symlink
-	curl -o archives/archive/dir/image.png https://avatars.githubusercontent.com/u/280562?v=4
-	echo "# archive\n\n\`\`\`" >> archives/archive/README.md
-	find archives/archive >> archives/archive/README.md
-	echo "\`\`\`" >> archives/archive/README.md
+archives/example:
+	rm -rf archives/example
+	mkdir -p archives/example/dir
+	touch archives/example/README.md
+	ln -s ../README.md archives/example/dir/symlink
+	curl -o archives/example/dir/image.png https://avatars.githubusercontent.com/u/280562?v=4
+	echo "# example\n\n\`\`\`" >> archives/example/README.md
+	find archives/example >> archives/example/README.md
+	echo "\`\`\`" >> archives/example/README.md

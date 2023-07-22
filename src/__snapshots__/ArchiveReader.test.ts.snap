@@ -1,147 +1,147 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArchiveReader encrypted.zip 1`] = `
+exports[`ArchiveReader deflate.zip (forEach) 1`] = `
 Array [
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/",
+    "pathname": "example/",
     "size": 0,
   },
   Object {
-    "data": "# archive
+    "data": "# example
 
 \`\`\`
-archives/archive
-archives/archive/README.md
-archives/archive/dir
-archives/archive/dir/symlink
-archives/archive/dir/image.png
+archives/example
+archives/example/README.md
+archives/example/dir
+archives/example/dir/symlink
+archives/example/dir/image.png
 \`\`\`
 ",
-    "encrypted": true,
+    "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/README.md",
+    "pathname": "example/README.md",
     "size": 144,
   },
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/dir/",
+    "pathname": "example/dir/",
     "size": 0,
   },
   Object {
     "data": "",
-    "encrypted": true,
+    "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/dir/symlink",
+    "pathname": "example/dir/symlink",
     "size": 144,
   },
   Object {
     "data": "",
-    "encrypted": true,
+    "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/dir/image.png",
+    "pathname": "example/dir/image.png",
     "size": 1559,
   },
 ]
 `;
 
-exports[`ArchiveReader test.zip (forEach) 1`] = `
+exports[`ArchiveReader deflate.zip 1`] = `
 Array [
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/",
+    "pathname": "example/",
     "size": 0,
   },
   Object {
-    "data": "# archive
+    "data": "# example
 
 \`\`\`
-archives/archive
-archives/archive/README.md
-archives/archive/dir
-archives/archive/dir/symlink
-archives/archive/dir/image.png
+archives/example
+archives/example/README.md
+archives/example/dir
+archives/example/dir/symlink
+archives/example/dir/image.png
 \`\`\`
 ",
     "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/README.md",
+    "pathname": "example/README.md",
     "size": 144,
   },
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/dir/",
+    "pathname": "example/dir/",
     "size": 0,
   },
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/dir/symlink",
+    "pathname": "example/dir/symlink",
     "size": 144,
   },
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "File",
-    "pathname": "archive/dir/image.png",
+    "pathname": "example/dir/image.png",
     "size": 1559,
   },
 ]
 `;
 
-exports[`ArchiveReader test.zip 1`] = `
+exports[`ArchiveReader deflate-encrypted.zip 1`] = `
 Array [
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/",
+    "pathname": "example/",
     "size": 0,
   },
   Object {
-    "data": "# archive
+    "data": "# example
 
 \`\`\`
-archives/archive
-archives/archive/README.md
-archives/archive/dir
-archives/archive/dir/symlink
-archives/archive/dir/image.png
+archives/example
+archives/example/README.md
+archives/example/dir
+archives/example/dir/symlink
+archives/example/dir/image.png
 \`\`\`
 ",
-    "encrypted": false,
+    "encrypted": true,
     "filetype": "File",
-    "pathname": "archive/README.md",
+    "pathname": "example/README.md",
     "size": 144,
   },
   Object {
     "data": "",
     "encrypted": false,
     "filetype": "Directory",
-    "pathname": "archive/dir/",
+    "pathname": "example/dir/",
     "size": 0,
   },
   Object {
     "data": "",
-    "encrypted": false,
+    "encrypted": true,
     "filetype": "File",
-    "pathname": "archive/dir/symlink",
+    "pathname": "example/dir/symlink",
     "size": 144,
   },
   Object {
     "data": "",
-    "encrypted": false,
+    "encrypted": true,
     "filetype": "File",
-    "pathname": "archive/dir/image.png",
+    "pathname": "example/dir/image.png",
     "size": 1559,
   },
 ]

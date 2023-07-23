@@ -22,7 +22,8 @@ ENV LDFLAGS "-L/usr/local/lib"
 
 # compile openSSL to LLVM
 WORKDIR /opt/openssl-1.0.2u
-RUN cd /opt/openssl-1.0.2u && emmake bash -c "./Configure -no-asm -no-apps no-ssl2 no-ssl3 no-hw no-deprecated shared no-dso linux-generic32" && \
+RUN cd /opt/openssl-1.0.2u && \
+    emmake bash -c "./Configure no-asm no-apps no-ssl2 no-ssl3 no-hw no-deprecated shared no-dso linux-generic32" && \
     sed -i 's/CC= $(CROSS_COMPILE)\/emsdk_portable\/emscripten\/tag-1.39.4\/emcc/CC= $(CROSS_COMPILE)cc/' Makefile && \
     sed -i 's/-Bsymbolic/ /' Makefile.shared && \
     emmake make && \
@@ -32,17 +33,18 @@ RUN cd /opt/openssl-1.0.2u && emmake bash -c "./Configure -no-asm -no-apps no-ss
 
 # compile LZMA to LLVM
 WORKDIR /opt/xz-5.4.3
-RUN cd /opt/xz-5.4.3 && emconfigure ./configure --disable-assembler --enable-threads=no --enable-static=yes 2>&1 | tee conf.out && \
-    emmake make 2>&1 | tee make.out && emmake make install
+RUN cd /opt/xz-5.4.3 && \
+    emconfigure ./configure --disable-assembler --enable-threads=no --enable-shared=no --enable-static=yes && \
+    emmake make && emmake make install
 
 # compile libarchive to LLVM
 WORKDIR /opt/libarchive-3.6.2
-RUN cd /opt/libarchive-3.6.2 && emconfigure ./configure --enable-static --disable-shared --enable-bsdtar=static --enable-bsdcat=static \
-    --enable-bsdcpio=static --enable-posix-regex-lib=libc \
-    --disable-xattr --disable-acl --without-nettle --without-lzo2 \
-    --without-cng  --without-lz4 \
-    --without-xml2 --without-expat 2>&1 | tee conf.out && \
-    emmake make 2>&1 | tee make.out && emmake make install
+RUN cd /opt/libarchive-3.6.2 && \
+    emconfigure ./configure --disable-shared --enable-static \
+    --enable-bsdtar=static --enable-bsdcat=static --enable-bsdcpio=static \
+    --enable-posix-regex-lib=libc --disable-xattr --disable-acl \
+    --without-lz4 --without-lzo2 --without-cng --without-nettle --without-xml2 --without-expat && \
+    emmake make && emmake make install
 
 WORKDIR /workdir
 

@@ -1,7 +1,7 @@
 import { readFile } from 'fs/promises';
 
-import { libarchiveWasm } from './libarchiveWasm';
 import { ArchiveReader } from './ArchiveReader';
+import { libarchiveWasm } from './libarchiveWasm';
 
 const toEntries = (a: ArchiveReader): Record<string, unknown>[] => {
   const entries = [] as Record<string, unknown>[];

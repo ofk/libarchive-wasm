@@ -1,7 +1,7 @@
 {
   "name": "libarchive-wasm",
   "version": "1.0.0",
-  "description": "A WASM version of libarchive API",
+  "description": "Extract archive files in JavaScript, libarchive port in wasm",
   "license": "MIT",
   "author": "ofk <ofkjpn+npm@gmail.com> (https://github.com/ofk/)",
   "homepage": "https://github.com/ofk/libarchive-wasm#readme",

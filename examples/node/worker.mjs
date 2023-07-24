@@ -1,6 +1,7 @@
-import { parentPort } from 'worker_threads';
+import { parentPort } from 'node:worker_threads';
+
+import { ArchiveReader, libarchiveWasm } from 'libarchive-wasm';
 import { expose } from 'minlink/dist/node.mjs';
-import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
 
 expose(parentPort, {
   async extractAll(data) {

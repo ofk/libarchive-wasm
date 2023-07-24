@@ -2,13 +2,20 @@
   "private": true,
   "name": "examples",
   "scripts": {
-    "start": "parcel serve browser/index.html"
+    "start:browser": "parcel serve browser/index.html",
+    "start:node": "cd node && node main.mjs"
   },
   "dependencies": {
     "libarchive-wasm": "file:..",
     "minlink": "^2.0.1"
   },
   "devDependencies": {
-    "parcel": "^2.0.0-beta.2"
+    "buffer": "^6.0.3",
+    "crypto-browserify": "^3.12.0",
+    "events": "^3.3.0",
+    "parcel": "^2.9.3",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10",
+    "stream-browserify": "^3.0.0"
   }
 }

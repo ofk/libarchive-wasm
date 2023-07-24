@@ -1,6 +1,7 @@
-import { readFile } from 'fs/promises';
-import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
-import { Worker } from 'worker_threads';
+import { readFile } from 'node:fs/promises';
+import { Worker } from 'node:worker_threads';
+
+import { ArchiveReader, libarchiveWasm } from 'libarchive-wasm';
 import { wrap } from 'minlink/dist/node.mjs';
 
 (async () => {

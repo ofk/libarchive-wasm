@@ -1,4 +1,4 @@
-import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
+import { ArchiveReader, libarchiveWasm } from 'libarchive-wasm';
 import { wrap } from 'minlink/dist/browser';
 
 document.getElementById('upload').addEventListener('change', async (e) => {
@@ -6,19 +6,10 @@ document.getElementById('upload').addEventListener('change', async (e) => {
 
   await (async () => {
     console.log('Extract (main)');
-
-    const data = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.readAsArrayBuffer(file);
-    });
-
+    const data = await file.arrayBuffer();
     const mod = await libarchiveWasm({
       locateFile() {
-        // eslint-disable-next-line global-require, import/no-unresolved
-        return require('url:libarchive-wasm/dist/libarchive.wasm');
+        return new URL('npm:libarchive-wasm/dist/libarchive.wasm', import.meta.url).toString();
       },
     });
     const reader = new ArchiveReader(mod, new Int8Array(data));
@@ -35,17 +26,16 @@ document.getElementById('upload').addEventListener('change', async (e) => {
       results.push(result);
     }
     reader.free();
-
     document.getElementById('result-main').textContent = JSON.stringify(results, null, '  ');
   })();
 
   await (async () => {
     console.log('Extract (worker)');
-    const worker = new Worker('./worker.js');
+    const worker = new Worker(new URL('./worker.js', import.meta.url), { type: 'module' });
     const api = wrap(worker);
     const results = await api.exec('extractAll', file);
     console.log(results);
-    document.getElementById('result-worker').textContent = JSON.stringify(results, null, '  ');
     await api.terminate();
+    document.getElementById('result-worker').textContent = JSON.stringify(results, null, '  ');
   })();
 });

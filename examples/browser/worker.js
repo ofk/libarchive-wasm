@@ -1,20 +1,13 @@
+import { ArchiveReader, libarchiveWasm } from 'libarchive-wasm';
 import { expose } from 'minlink/dist/browser';
-import { libarchiveWasm, ArchiveReader } from 'libarchive-wasm';
 
 // eslint-disable-next-line no-restricted-globals
 expose(self, {
   async extractAll(file) {
-    const data = await new Promise((resolve) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.readAsArrayBuffer(file);
-    });
+    const data = await file.arrayBuffer();
     const mod = await libarchiveWasm({
       locateFile() {
-        // eslint-disable-next-line global-require, import/no-unresolved
-        return require('url:libarchive-wasm/dist/libarchive.wasm');
+        return new URL('npm:libarchive-wasm/dist/libarchive.wasm', import.meta.url).toString();
       },
     });
     const reader = new ArchiveReader(mod, new Int8Array(data));

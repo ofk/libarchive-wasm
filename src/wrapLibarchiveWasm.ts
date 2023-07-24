@@ -1,11 +1,11 @@
 import type { LibarchiveModule } from './libarchive';
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type, @typescript-eslint/explicit-module-boundary-types
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function wrapLibarchiveWasm(module: LibarchiveModule) {
   /* eslint-disable @typescript-eslint/no-explicit-any */
-  const checkReturnValue = <R extends any, F extends (...args: any[]) => R>(
+  const checkReturnValue = <R, F extends (...args: any[]) => R>(
     fn: F,
-    test: (r: R) => boolean
+    test: (r: R) => boolean,
   ): F =>
     function f(this: any, ...args: any[]) {
       const r = fn(...args);
@@ -27,20 +27,20 @@ export function wrapLibarchiveWasm(module: LibarchiveModule) {
         'number',
         'string',
       ] as const),
-      (r: number) => r === 0
+      (r: number) => r === 0,
     ),
     read_new: module.cwrap('archive_read_new', 'number', []),
     read_support_filter_all: checkReturnValue(
       module.cwrap('archive_read_support_filter_all', 'number', ['number'] as const),
-      nonzero
+      nonzero,
     ),
     read_support_format_all: checkReturnValue(
       module.cwrap('archive_read_support_format_all', 'number', ['number'] as const),
-      nonzero
+      nonzero,
     ),
     read_open_memory: checkReturnValue(
       module.cwrap('archive_read_open_memory', 'number', ['number', 'number', 'number'] as const),
-      nonzero
+      nonzero,
     ),
     read_next_entry: module.cwrap('archive_read_next_entry', 'number', ['number'] as const),
     read_has_encrypted_entries: module.cwrap('archive_read_has_encrypted_entries', 'number', [
@@ -48,19 +48,19 @@ export function wrapLibarchiveWasm(module: LibarchiveModule) {
     ] as const),
     read_data: checkReturnValue(
       module.cwrap('archive_read_data', 'number', ['number', 'number', 'number'] as const),
-      (r: number) => r < 0
+      (r: number) => r < 0,
     ),
     read_data_skip: checkReturnValue(
       module.cwrap('archive_read_data_skip', 'number', ['number'] as const),
-      nonzero
+      nonzero,
     ),
     read_add_passphrase: checkReturnValue(
       module.cwrap('archive_read_add_passphrase', 'number', ['number', 'string'] as const),
-      nonzero
+      nonzero,
     ),
     read_free: checkReturnValue(
       module.cwrap('archive_read_free', 'number', ['number'] as const),
-      nonzero
+      nonzero,
     ),
     error_string: module.cwrap('archive_error_string', 'string', ['number'] as const),
     entry_filetype: module.cwrap('archive_entry_filetype', 'number', ['number'] as const),

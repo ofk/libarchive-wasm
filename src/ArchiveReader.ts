@@ -1,6 +1,6 @@
 /* eslint-disable no-underscore-dangle */
-import type { LibarchiveWasm } from './libarchiveWasm';
 import { ArchiveReaderEntry } from './ArchiveReaderEntry';
+import type { LibarchiveWasm } from './libarchiveWasm';
 
 export class ArchiveReader {
   public libarchive: LibarchiveWasm;

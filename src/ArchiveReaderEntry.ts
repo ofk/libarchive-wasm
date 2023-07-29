@@ -1,6 +1,11 @@
 import type { ArchiveReader } from './ArchiveReader';
 
-const SECS_IN_MS = 1000;
+/**
+ * Specifies how many milliseconds make up a second.
+ *
+ * This constant allows the conversion of the C `time_t` type into JavaScript-friendly `Date` time.
+ */
+const ONE_SEC_IN_MS = 1000;
 
 export class ArchiveReaderEntry {
   public reader: ArchiveReader;
@@ -53,11 +58,11 @@ export class ArchiveReaderEntry {
   }
 
   getCreationTime(): number {
-    return this.reader.getCreationTime(this.pointer) * SECS_IN_MS;
+    return this.reader.getCreationTime(this.pointer) * ONE_SEC_IN_MS; // convert secs to ms
   }
 
   getModificationTime(): number {
-    return this.reader.getModificationTime(this.pointer) * SECS_IN_MS;
+    return this.reader.getModificationTime(this.pointer) * ONE_SEC_IN_MS; // convert secs to ms
   }
 
   isEncrypted(): boolean {

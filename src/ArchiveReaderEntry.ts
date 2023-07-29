@@ -1,5 +1,7 @@
 import type { ArchiveReader } from './ArchiveReader';
 
+const SECS_IN_MS = 1000;
+
 export class ArchiveReaderEntry {
   public reader: ArchiveReader;
 
@@ -48,6 +50,14 @@ export class ArchiveReaderEntry {
 
   getSize(): number {
     return this.reader.getEntrySize(this.pointer);
+  }
+
+  getCreationTime(): number {
+    return this.reader.getCreationTime(this.pointer) * SECS_IN_MS;
+  }
+
+  getModificationTime(): number {
+    return this.reader.getModificationTime(this.pointer) * SECS_IN_MS;
   }
 
   isEncrypted(): boolean {

@@ -71,6 +71,14 @@ export class ArchiveReader {
     return this.libarchive.entry_size(ptr);
   }
 
+  getCreationTime(ptr: number): number {
+    return this.libarchive.entry_ctime(ptr);
+  }
+
+  getModificationTime(ptr: number): number {
+    return this.libarchive.entry_mtime(ptr);
+  }
+
   isEntryEncrypted(ptr: number): boolean {
     return !!this.libarchive.entry_is_encrypted(ptr);
   }

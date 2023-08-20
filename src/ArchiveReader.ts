@@ -2,6 +2,13 @@
 import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 import type { LibarchiveWasm } from './libarchiveWasm';
 
+/**
+ * Specifies how many milliseconds make up a second.
+ *
+ * This constant allows the conversion of the C `time_t` type into JavaScript-friendly `Date` time.
+ */
+const ONE_SEC_IN_MS = 1000;
+
 export class ArchiveReader {
   public libarchive: LibarchiveWasm;
 
@@ -72,11 +79,11 @@ export class ArchiveReader {
   }
 
   getCreationTime(ptr: number): number {
-    return this.libarchive.entry_ctime(ptr);
+    return this.libarchive.entry_ctime(ptr) * ONE_SEC_IN_MS; // convert secs to ms
   }
 
   getModificationTime(ptr: number): number {
-    return this.libarchive.entry_mtime(ptr);
+    return this.libarchive.entry_mtime(ptr) * ONE_SEC_IN_MS; // convert secs to ms
   }
 
   isEntryEncrypted(ptr: number): boolean {

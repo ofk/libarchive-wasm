@@ -50,6 +50,14 @@ export class ArchiveReaderEntry {
     return this.reader.getEntrySize(this.pointer);
   }
 
+  getCreationTime(): number {
+    return this.reader.getCreationTime(this.pointer);
+  }
+
+  getModificationTime(): number {
+    return this.reader.getModificationTime(this.pointer);
+  }
+
   isEncrypted(): boolean {
     return this.reader.isEntryEncrypted(this.pointer);
   }

@@ -3,8 +3,8 @@ import { readFile } from 'fs/promises';
 import { ArchiveReader } from './ArchiveReader';
 import { libarchiveWasm } from './libarchiveWasm';
 
-const toEntries = (a: ArchiveReader): Record<string, unknown>[] => {
-  const entries = [] as Record<string, unknown>[];
+function verifyArchiveEntries(a: ArchiveReader): void {
+  const entries: Record<string, unknown>[] = [];
   for (;;) {
     const entryPointer = a.nextEntryPointer();
     if (entryPointer === 0) break;
@@ -18,58 +18,42 @@ const toEntries = (a: ArchiveReader): Record<string, unknown>[] => {
       data: new TextDecoder().decode(data || undefined),
       encrypted: a.isEntryEncrypted(entryPointer),
     });
-  }
-  return entries;
-};
 
-const testExtract = (name: string, passphrase?: string): void => {
+    const ctime = a.getCreationTime(entryPointer);
+    const mtime = a.getModificationTime(entryPointer);
+    expect(ctime).toBe(0);
+    expect(mtime).toBeGreaterThan(new Date('2020-01-01').getTime());
+  }
+  expect(entries).toMatchSnapshot();
+}
+
+function testArchive(name: string, passphrase?: string): void {
   test(name, async () => {
     const data = await readFile(`./archives/${name}`);
     const mod = await libarchiveWasm();
     const a = new ArchiveReader(mod, new Int8Array(data), passphrase);
     expect(a.hasEncryptedData()).toBe(null);
-    const entries = toEntries(a);
-    expect(entries).toMatchSnapshot();
+    verifyArchiveEntries(a);
     expect(!!a.hasEncryptedData()).toBe(passphrase != null);
     a.free();
   });
-};
+}
 
 describe('ArchiveReader', () => {
-  test('deflate.zip (forEach)', async () => {
-    const data = await readFile('./archives/deflate.zip');
-    const mod = await libarchiveWasm();
-    const a = new ArchiveReader(mod, new Int8Array(data));
-    const entries = [] as Record<string, unknown>[];
-    a.forEach((entry) => {
-      const pathname = entry.getPathname();
-      const entryData = /\.md/.test(pathname) ? entry.readData() : undefined;
-      entries.push({
-        filetype: entry.getFiletype(),
-        pathname,
-        size: entry.getSize(),
-        data: new TextDecoder().decode(entryData || undefined),
-        encrypted: entry.isEncrypted(),
-      });
-    });
-    expect(entries).toMatchSnapshot();
-    a.free();
-  });
+  testArchive('deflate.zip');
+  testArchive('deflate-encrypted.zip', 'Passw0rd!');
+  testArchive('store.zip');
 
-  testExtract('deflate.zip');
-  testExtract('deflate-encrypted.zip', 'Passw0rd!');
-  testExtract('store.zip');
+  testArchive('a.tar');
+  testArchive('a.tar.bz2');
+  testArchive('a.tar.gz');
+  testArchive('a.tar.xz');
 
-  testExtract('a.tar');
-  testExtract('a.tar.bz2');
-  testExtract('a.tar.gz');
-  testExtract('a.tar.xz');
+  testArchive('bzip2.7z');
+  testArchive('lzma.7z');
+  testArchive('lzma2.7z');
 
-  testExtract('bzip2.7z');
-  testExtract('lzma.7z');
-  testExtract('lzma2.7z');
-
-  testExtract('v4.rar');
-  testExtract('v4-encrypted.rar', 'Passw0rd!');
-  testExtract('v5.rar');
+  testArchive('v4.rar');
+  testArchive('v4-encrypted.rar', 'Passw0rd!');
+  testArchive('v5.rar');
 });

@@ -19,8 +19,12 @@ function verifyArchiveEntries(a: ArchiveReader): void {
       encrypted: a.isEntryEncrypted(entryPointer),
     });
 
-    const ctime = a.getCreationTime(entryPointer);
-    const mtime = a.getModificationTime(entryPointer);
+    const atime = a.getEntryAccessTime(entryPointer);
+    const btime = a.getEntryBirthTime(entryPointer);
+    const ctime = a.getEntryCreationTime(entryPointer);
+    const mtime = a.getEntryModificationTime(entryPointer);
+    expect(atime).toBeGreaterThanOrEqual(0);
+    expect(btime).toBe(0);
     expect(ctime).toBe(0);
     expect(mtime).toBeGreaterThan(new Date('2020-01-01').getTime());
   }

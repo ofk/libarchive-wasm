@@ -17,8 +17,12 @@ function verifyArchiveEntries(a: ArchiveReader): void {
       encrypted: entry.isEncrypted(),
     });
 
+    const atime = entry.getAccessTime();
+    const btime = entry.getBirthTime();
     const ctime = entry.getCreationTime();
     const mtime = entry.getModificationTime();
+    expect(atime).toBeGreaterThanOrEqual(0);
+    expect(btime).toBe(0);
     expect(ctime).toBe(0);
     expect(mtime).toBeGreaterThan(new Date('2020-01-01').getTime());
   });

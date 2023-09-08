@@ -68,6 +68,8 @@ export function wrapLibarchiveWasm(module: LibarchiveModule) {
     entry_symlink: module.cwrap('archive_entry_symlink_utf8', 'string', ['number'] as const),
     entry_hardlink: module.cwrap('archive_entry_hardlink_utf8', 'string', ['number'] as const),
     entry_size: module.cwrap('archive_entry_size', 'number', ['number'] as const),
+    entry_atime: module.cwrap('archive_entry_atime', 'number', ['number'] as const),
+    entry_birthtime: module.cwrap('archive_entry_birthtime', 'number', ['number'] as const),
     entry_ctime: module.cwrap('archive_entry_ctime', 'number', ['number'] as const),
     entry_mtime: module.cwrap('archive_entry_mtime', 'number', ['number'] as const),
     entry_is_encrypted: module.cwrap('archive_entry_is_encrypted', 'number', ['number'] as const),

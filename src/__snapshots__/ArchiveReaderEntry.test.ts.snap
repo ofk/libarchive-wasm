@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ArchiveReaderEntry verification all methods 1`] = `
+[
+  {
+    "data": "",
+    "encrypted": false,
+    "filetype": "Directory",
+    "pathname": "example/",
+    "size": 0,
+  },
+  {
+    "data": "# example
+
+\`\`\`
+archives/example
+archives/example/README.md
+archives/example/dir
+archives/example/dir/symlink
+archives/example/dir/image.png
+\`\`\`
+",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "example/README.md",
+    "size": 144,
+  },
+  {
+    "data": "",
+    "encrypted": false,
+    "filetype": "Directory",
+    "pathname": "example/dir/",
+    "size": 0,
+  },
+  {
+    "data": "",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "example/dir/symlink",
+    "size": 144,
+  },
+  {
+    "data": "",
+    "encrypted": false,
+    "filetype": "File",
+    "pathname": "example/dir/image.png",
+    "size": 1559,
+  },
+]
+`;

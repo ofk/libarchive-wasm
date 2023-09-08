@@ -16,6 +16,8 @@
   "_archive_error_string",
   "_archive_entry_filetype",
   "_archive_entry_pathname_utf8",
+  "_archive_entry_atime",
+  "_archive_entry_birthtime",
   "_archive_entry_ctime",
   "_archive_entry_mtime",
   "_archive_entry_size",

@@ -20,6 +20,8 @@
   "_archive_entry_mtime",
   "_archive_entry_size",
   "_archive_entry_is_encrypted",
+  "_archive_entry_symlink_utf8",
+  "_archive_entry_hardlink_utf8",
   "_malloc",
   "_free"
 ]

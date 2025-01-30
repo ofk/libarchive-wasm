@@ -13,4 +13,6 @@ export declare class ArchiveReaderEntry {
     getCreationTime(): number;
     getModificationTime(): number;
     isEncrypted(): boolean;
+    getSymlinkTarget(): string;
+    getHardlinkTarget(): string;
 }

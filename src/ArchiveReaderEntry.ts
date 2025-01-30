@@ -61,4 +61,12 @@ export class ArchiveReaderEntry {
   isEncrypted(): boolean {
     return this.reader.isEntryEncrypted(this.pointer);
   }
+
+  getSymlinkTarget(): string {
+    return this.reader.getSymlinkTarget(this.pointer);
+  }
+
+  getHardlinkTarget(): string {
+    return this.reader.getHardlinkTarget(this.pointer);
+  }
 }

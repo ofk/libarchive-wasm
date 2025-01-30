@@ -90,6 +90,14 @@ export class ArchiveReader {
     return !!this.libarchive.entry_is_encrypted(ptr);
   }
 
+  getSymlinkTarget(ptr: number): string {
+    return this.libarchive.entry_symlink(ptr);
+  }
+
+  getHardlinkTarget(ptr: number): string {
+    return this.libarchive.entry_hardlink(ptr);
+  }
+
   nextEntry(): ArchiveReaderEntry | null {
     const entryPtr = this.nextEntryPointer();
     if (entryPtr === 0) return null;

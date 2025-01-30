@@ -19,6 +19,8 @@ export declare class ArchiveReader {
     getCreationTime(ptr: number): number;
     getModificationTime(ptr: number): number;
     isEntryEncrypted(ptr: number): boolean;
+    getSymlinkTarget(ptr: number): string;
+    getHardlinkTarget(ptr: number): string;
     nextEntry(): ArchiveReaderEntry | null;
     forEach(fn: (entry: ArchiveReaderEntry) => unknown): void;
     entries(): Generator<ArchiveReaderEntry, void, unknown>;

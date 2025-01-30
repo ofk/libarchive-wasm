@@ -47,6 +47,12 @@ var ArchiveReaderEntry = /** @class */ (function () {
     ArchiveReaderEntry.prototype.isEncrypted = function () {
         return this.reader.isEntryEncrypted(this.pointer);
     };
+    ArchiveReaderEntry.prototype.getSymlinkTarget = function () {
+        return this.reader.getSymlinkTarget(this.pointer);
+    };
+    ArchiveReaderEntry.prototype.getHardlinkTarget = function () {
+        return this.reader.getHardlinkTarget(this.pointer);
+    };
     return ArchiveReaderEntry;
 }());
 exports.ArchiveReaderEntry = ArchiveReaderEntry;

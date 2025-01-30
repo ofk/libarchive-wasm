@@ -87,6 +87,12 @@ var ArchiveReader = /** @class */ (function () {
     ArchiveReader.prototype.isEntryEncrypted = function (ptr) {
         return !!this.libarchive.entry_is_encrypted(ptr);
     };
+    ArchiveReader.prototype.getSymlinkTarget = function (ptr) {
+        return this.libarchive.entry_symlink(ptr);
+    };
+    ArchiveReader.prototype.getHardlinkTarget = function (ptr) {
+        return this.libarchive.entry_hardlink(ptr);
+    };
     ArchiveReader.prototype.nextEntry = function () {
         var entryPtr = this.nextEntryPointer();
         if (entryPtr === 0)

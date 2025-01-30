@@ -1,0 +1,27 @@
+import type { LibarchiveModule } from './libarchive';
+export declare function wrapLibarchiveWasm(module: LibarchiveModule): {
+    module: LibarchiveModule;
+    version_number: () => number;
+    version_string: () => string;
+    version_details: () => string;
+    read_new_memory: (args_0: number, args_1: number, args_2?: string | undefined) => number;
+    read_new: () => number;
+    read_support_filter_all: (args_0: number) => number;
+    read_support_format_all: (args_0: number) => number;
+    read_open_memory: (args_0: number, args_1: number, args_2: number) => number;
+    read_next_entry: (args_0: number) => number;
+    read_has_encrypted_entries: (args_0: number) => number;
+    read_data: (args_0: number, args_1: number, args_2: number) => number;
+    read_data_skip: (args_0: number) => number;
+    read_add_passphrase: (args_0: number, args_1: string) => number;
+    read_free: (args_0: number) => number;
+    error_string: (args_0: number) => string;
+    entry_filetype: (args_0: number) => number;
+    entry_pathname: (args_0: number) => string;
+    entry_symlink: (args_0: number) => string;
+    entry_hardlink: (args_0: number) => string;
+    entry_size: (args_0: number) => number;
+    entry_ctime: (args_0: number) => number;
+    entry_mtime: (args_0: number) => number;
+    entry_is_encrypted: (args_0: number) => number;
+};

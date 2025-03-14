@@ -10,6 +10,8 @@ export declare class ArchiveReaderEntry {
     getFiletype(): string;
     getPathname(): string;
     getSize(): number;
+    getAccessTime(): number;
+    getBirthTime(): number;
     getCreationTime(): number;
     getModificationTime(): number;
     isEncrypted(): boolean;

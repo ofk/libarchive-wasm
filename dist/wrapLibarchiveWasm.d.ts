@@ -21,6 +21,8 @@ export declare function wrapLibarchiveWasm(module: LibarchiveModule): {
     entry_symlink: (args_0: number) => string;
     entry_hardlink: (args_0: number) => string;
     entry_size: (args_0: number) => number;
+    entry_atime: (args_0: number) => number;
+    entry_birthtime: (args_0: number) => number;
     entry_ctime: (args_0: number) => number;
     entry_mtime: (args_0: number) => number;
     entry_is_encrypted: (args_0: number) => number;

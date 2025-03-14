@@ -1,11 +1,11 @@
 "use strict";
 var __generator = (this && this.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g = Object.create((typeof Iterator === "function" ? Iterator : Object).prototype);
+    return g.next = verb(0), g["throw"] = verb(1), g["return"] = verb(2), typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
+        while (g && (g = 0, op[0] && (_ = 0)), _) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -29,15 +29,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ArchiveReader = void 0;
-/* eslint-disable no-underscore-dangle */
 var ArchiveReaderEntry_1 = require("./ArchiveReaderEntry");
-/**
- * Specifies how many milliseconds make up a second.
- *
- * This constant allows the conversion of the C `time_t` type into JavaScript-friendly `Date` time.
- */
-var ONE_SEC_IN_MS = 1000;
+function toTimeFromTimeT(timeT) {
+    return timeT * 1000;
+}
 var ArchiveReader = /** @class */ (function () {
+    /* eslint-enable perfectionist/sort-objects, @typescript-eslint/no-unnecessary-template-expression, @typescript-eslint/restrict-template-expressions */
     function ArchiveReader(libarchive, data, passphrase) {
         var ptr = libarchive.module._malloc(data.length);
         libarchive.module.HEAP8.set(data, ptr);
@@ -70,7 +67,10 @@ var ArchiveReader = /** @class */ (function () {
         return this.libarchive.read_next_entry(this.archive);
     };
     ArchiveReader.prototype.getEntryFiletype = function (ptr) {
-        return ArchiveReader.FileTypes["".concat(this.libarchive.entry_filetype(ptr))] || 'Invalid';
+        var fileType = String(this.libarchive.entry_filetype(ptr));
+        return fileType in ArchiveReader.FileTypes
+            ? ArchiveReader.FileTypes[fileType]
+            : 'Invalid';
     };
     ArchiveReader.prototype.getEntryPathname = function (ptr) {
         return this.libarchive.entry_pathname(ptr);
@@ -78,11 +78,17 @@ var ArchiveReader = /** @class */ (function () {
     ArchiveReader.prototype.getEntrySize = function (ptr) {
         return this.libarchive.entry_size(ptr);
     };
-    ArchiveReader.prototype.getCreationTime = function (ptr) {
-        return this.libarchive.entry_ctime(ptr) * ONE_SEC_IN_MS; // convert secs to ms
+    ArchiveReader.prototype.getEntryAccessTime = function (ptr) {
+        return toTimeFromTimeT(this.libarchive.entry_atime(ptr));
     };
-    ArchiveReader.prototype.getModificationTime = function (ptr) {
-        return this.libarchive.entry_mtime(ptr) * ONE_SEC_IN_MS; // convert secs to ms
+    ArchiveReader.prototype.getEntryBirthTime = function (ptr) {
+        return toTimeFromTimeT(this.libarchive.entry_birthtime(ptr));
+    };
+    ArchiveReader.prototype.getEntryCreationTime = function (ptr) {
+        return toTimeFromTimeT(this.libarchive.entry_ctime(ptr));
+    };
+    ArchiveReader.prototype.getEntryModificationTime = function (ptr) {
+        return toTimeFromTimeT(this.libarchive.entry_mtime(ptr));
     };
     ArchiveReader.prototype.isEntryEncrypted = function (ptr) {
         return !!this.libarchive.entry_is_encrypted(ptr);
@@ -126,6 +132,7 @@ var ArchiveReader = /** @class */ (function () {
             }
         });
     };
+    /* eslint-disable perfectionist/sort-objects, @typescript-eslint/no-unnecessary-template-expression, @typescript-eslint/restrict-template-expressions */
     ArchiveReader.FileTypes = (_a = {},
         _a["".concat(61440)] = 'Mount',
         _a["".concat(32768)] = 'File',

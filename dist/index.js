@@ -18,8 +18,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.libarchive = void 0;
-var libarchive_1 = __importDefault(require("./libarchive"));
-exports.libarchive = libarchive_1.default;
+__exportStar(require("./ArchiveReader"), exports);
+var libarchive_1 = require("./libarchive");
+Object.defineProperty(exports, "libarchive", { enumerable: true, get: function () { return __importDefault(libarchive_1).default; } });
 __exportStar(require("./libarchiveWasm"), exports);
 __exportStar(require("./wrapLibarchiveWasm"), exports);
-__exportStar(require("./ArchiveReader"), exports);

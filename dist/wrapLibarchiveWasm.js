@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.wrapLibarchiveWasm = void 0;
+exports.wrapLibarchiveWasm = wrapLibarchiveWasm;
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 function wrapLibarchiveWasm(module) {
-    /* eslint-disable @typescript-eslint/no-explicit-any */
+    /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, unicorn/consistent-function-scoping */
     var checkReturnValue = function (fn, test) {
         return function f() {
             var args = [];
@@ -16,8 +16,8 @@ function wrapLibarchiveWasm(module) {
             return r;
         };
     };
-    /* eslint-enable @typescript-eslint/no-explicit-any */
     var nonzero = function (r) { return r !== 0; };
+    /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, unicorn/consistent-function-scoping */
     return {
         module: module,
         version_number: module.cwrap('archive_version_number', 'number', []),
@@ -46,9 +46,10 @@ function wrapLibarchiveWasm(module) {
         entry_symlink: module.cwrap('archive_entry_symlink_utf8', 'string', ['number']),
         entry_hardlink: module.cwrap('archive_entry_hardlink_utf8', 'string', ['number']),
         entry_size: module.cwrap('archive_entry_size', 'number', ['number']),
+        entry_atime: module.cwrap('archive_entry_atime', 'number', ['number']),
+        entry_birthtime: module.cwrap('archive_entry_birthtime', 'number', ['number']),
         entry_ctime: module.cwrap('archive_entry_ctime', 'number', ['number']),
         entry_mtime: module.cwrap('archive_entry_mtime', 'number', ['number']),
         entry_is_encrypted: module.cwrap('archive_entry_is_encrypted', 'number', ['number']),
     };
 }
-exports.wrapLibarchiveWasm = wrapLibarchiveWasm;

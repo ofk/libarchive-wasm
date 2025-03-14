@@ -1,11 +1,18 @@
-import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 import type { LibarchiveWasm } from './libarchiveWasm';
+import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 export declare class ArchiveReader {
     libarchive: LibarchiveWasm;
     archive: number;
     pointer: number;
     static FileTypes: {
-        [x: string]: string;
+        "61440": string;
+        "32768": string;
+        "40960": string;
+        "49152": string;
+        "8192": string;
+        "24576": string;
+        "16384": string;
+        "4096": string;
     };
     constructor(libarchive: LibarchiveWasm, data: Int8Array, passphrase?: string);
     free(): void;
@@ -16,8 +23,10 @@ export declare class ArchiveReader {
     getEntryFiletype(ptr: number): string;
     getEntryPathname(ptr: number): string;
     getEntrySize(ptr: number): number;
-    getCreationTime(ptr: number): number;
-    getModificationTime(ptr: number): number;
+    getEntryAccessTime(ptr: number): number;
+    getEntryBirthTime(ptr: number): number;
+    getEntryCreationTime(ptr: number): number;
+    getEntryModificationTime(ptr: number): number;
     isEntryEncrypted(ptr: number): boolean;
     getSymlinkTarget(ptr: number): string;
     getHardlinkTarget(ptr: number): string;

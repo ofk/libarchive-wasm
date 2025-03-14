@@ -38,11 +38,17 @@ var ArchiveReaderEntry = /** @class */ (function () {
     ArchiveReaderEntry.prototype.getSize = function () {
         return this.reader.getEntrySize(this.pointer);
     };
+    ArchiveReaderEntry.prototype.getAccessTime = function () {
+        return this.reader.getEntryAccessTime(this.pointer);
+    };
+    ArchiveReaderEntry.prototype.getBirthTime = function () {
+        return this.reader.getEntryBirthTime(this.pointer);
+    };
     ArchiveReaderEntry.prototype.getCreationTime = function () {
-        return this.reader.getCreationTime(this.pointer);
+        return this.reader.getEntryCreationTime(this.pointer);
     };
     ArchiveReaderEntry.prototype.getModificationTime = function () {
-        return this.reader.getModificationTime(this.pointer);
+        return this.reader.getEntryModificationTime(this.pointer);
     };
     ArchiveReaderEntry.prototype.isEncrypted = function () {
         return this.reader.isEntryEncrypted(this.pointer);

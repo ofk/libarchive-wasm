@@ -1,4 +1,4 @@
-import { readFile } from 'fs/promises';
+import { readFile } from 'node:fs/promises';
 
 import { ArchiveReader } from './ArchiveReader';
 import { libarchiveWasm } from './libarchiveWasm';
@@ -10,13 +10,14 @@ function verifyArchiveEntries(a: ArchiveReader): void {
     if (entryPointer === 0) break;
     const pathname = a.getEntryPathname(entryPointer);
     const size = a.getEntrySize(entryPointer);
-    const data = /\.md/.test(pathname) ? a.readData(size) : a.skipData();
+    // eslint-disable-next-line @typescript-eslint/no-confusing-void-expression
+    const data = pathname.includes('.md') ? a.readData(size) : (a.skipData() as undefined);
     entries.push({
+      data: new TextDecoder().decode(data),
+      encrypted: a.isEntryEncrypted(entryPointer),
       filetype: a.getEntryFiletype(entryPointer),
       pathname,
       size,
-      data: new TextDecoder().decode(data || undefined),
-      encrypted: a.isEntryEncrypted(entryPointer),
     });
 
     const atime = a.getEntryAccessTime(entryPointer);

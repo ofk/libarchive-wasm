@@ -1,6 +1,0 @@
-coverage
-dist
-examples
-lib/build
-src/libarchive.js
-node_modules

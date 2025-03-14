@@ -15,7 +15,7 @@
     "build": "tsc -p tsconfig.build.json",
     "postbuild": "cp src/*.wasm dist",
     "lint": "run-s -c lint:*",
-    "lint:eslint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint:eslint": "eslint src",
     "lint:package-json": "prettier-package-json -l",
     "lint:prettier": "prettier --check .",
     "lint:tsc": "tsc",
@@ -42,7 +42,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "eslint --fix --ext .js,.jsx,.ts,.tsx",
+      "eslint --fix",
       "prettier --write"
     ],
     "package.json": "prettier-package-json --write",

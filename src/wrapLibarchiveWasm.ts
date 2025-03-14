@@ -1,8 +1,9 @@
+/* eslint-disable perfectionist/sort-objects */
 import type { LibarchiveModule } from './libarchive';
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
 export function wrapLibarchiveWasm(module: LibarchiveModule) {
-  /* eslint-disable @typescript-eslint/no-explicit-any */
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, unicorn/consistent-function-scoping */
   const checkReturnValue = <R, F extends (...args: any[]) => R>(
     fn: F,
     test: (r: R) => boolean,
@@ -12,9 +13,9 @@ export function wrapLibarchiveWasm(module: LibarchiveModule) {
       if (test(r)) throw new Error(this.error_string(args[0]));
       return r;
     } as unknown as F;
-  /* eslint-enable @typescript-eslint/no-explicit-any */
 
   const nonzero = (r: number): boolean => r !== 0;
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, unicorn/consistent-function-scoping */
 
   return {
     module,

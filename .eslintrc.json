@@ -1,7 +1,0 @@
-{
-  "root": true,
-  "parserOptions": {
-    "project": "./tsconfig.json"
-  },
-  "extends": "@ofk/eslint-config-recommend"
-}

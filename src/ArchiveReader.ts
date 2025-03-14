@@ -1,18 +1,19 @@
-/* eslint-disable no-underscore-dangle */
-import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 import type { LibarchiveWasm } from './libarchiveWasm';
+
+import { ArchiveReaderEntry } from './ArchiveReaderEntry';
 
 function toTimeFromTimeT(timeT: number): number {
   return timeT * 1000;
 }
 
 export class ArchiveReader {
-  public libarchive: LibarchiveWasm;
+  libarchive: LibarchiveWasm;
 
-  public archive: number;
+  archive: number;
 
-  public pointer: number;
+  pointer: number;
 
+  /* eslint-disable perfectionist/sort-objects, @typescript-eslint/no-unnecessary-template-expression, @typescript-eslint/restrict-template-expressions */
   static FileTypes = {
     [`${0o170000}`]: 'Mount',
     [`${0o100000}`]: 'File',
@@ -23,13 +24,14 @@ export class ArchiveReader {
     [`${0o040000}`]: 'Directory',
     [`${0o010000}`]: 'NamedPipe',
   };
+  /* eslint-enable perfectionist/sort-objects, @typescript-eslint/no-unnecessary-template-expression, @typescript-eslint/restrict-template-expressions */
 
   constructor(libarchive: LibarchiveWasm, data: Int8Array, passphrase?: string) {
     const ptr = libarchive.module._malloc(data.length);
     libarchive.module.HEAP8.set(data, ptr);
 
     this.libarchive = libarchive;
-    this.archive = libarchive.read_new_memory(ptr, data.length, passphrase as string);
+    this.archive = libarchive.read_new_memory(ptr, data.length, passphrase);
     this.pointer = ptr;
   }
 
@@ -64,7 +66,10 @@ export class ArchiveReader {
   }
 
   getEntryFiletype(ptr: number): string {
-    return ArchiveReader.FileTypes[`${this.libarchive.entry_filetype(ptr)}`] || 'Invalid';
+    const fileType = String(this.libarchive.entry_filetype(ptr));
+    return fileType in ArchiveReader.FileTypes
+      ? ArchiveReader.FileTypes[fileType as keyof typeof ArchiveReader.FileTypes]
+      : 'Invalid';
   }
 
   getEntryPathname(ptr: number): string {

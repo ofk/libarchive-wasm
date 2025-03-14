@@ -1,11 +1,12 @@
 import type { ArchiveReader } from './ArchiveReader';
 
 export class ArchiveReaderEntry {
-  public reader: ArchiveReader;
+  // eslint-disable-next-line @typescript-eslint/parameter-properties
+  reader: ArchiveReader;
 
-  public pointer: number;
+  pointer: number;
 
-  public readCalled: boolean;
+  readCalled: boolean;
 
   constructor(reader: ArchiveReader, ptr: number) {
     this.reader = reader;

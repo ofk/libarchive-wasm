@@ -28,19 +28,17 @@
   },
   "types": "dist/index.d.ts",
   "devDependencies": {
-    "@ofk/eslint-config-recommend": "^6.0.0",
+    "@ofk/eslint-config-recommend": "^7.0.1",
     "@types/jest": "^29.5.3",
-    "@typescript-eslint/eslint-plugin": "^6.1.0",
-    "@typescript-eslint/parser": "^6.1.0",
-    "eslint": "^8.45.0",
+    "eslint": "^9.22.0",
     "husky": "^8.0.3",
     "jest": "^29.6.1",
     "lint-staged": "^13.2.3",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.0.0",
+    "prettier": "^3.5.3",
     "prettier-package-json": "^2.8.0",
     "ts-jest": "^29.1.1",
-    "typescript": "^5.1.6"
+    "typescript": "^5.8.2"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -49,5 +47,6 @@
     ],
     "package.json": "prettier-package-json --write",
     "*.{md,json,html}": "prettier --write"
-  }
+  },
+  "packageManager": "npm@10.8.0+sha512.c21f77b91733829ec70e73cc88b5dc0a4bf685a81d252d3327d293ff7d5dd05a173f4dbeaa037600ec29696f397f14569229e5dab10b7cfc3e0a30575b8f3f8d"
 }

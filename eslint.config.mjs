@@ -5,6 +5,7 @@ export default config({
     {
       files: ['**/*.test.*'],
       rules: {
+        'import/no-extraneous-dependencies': 'off',
         'import/no-nodejs-modules': 'off',
       },
     },

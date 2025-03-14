@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ArchiveReader a.tar 1`] = `
+exports[`ArchiveReader > a.tar 1`] = `
 [
   {
     "data": "",
@@ -49,7 +49,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader a.tar.bz2 1`] = `
+exports[`ArchiveReader > a.tar.bz2 1`] = `
 [
   {
     "data": "",
@@ -98,7 +98,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader a.tar.gz 1`] = `
+exports[`ArchiveReader > a.tar.gz 1`] = `
 [
   {
     "data": "",
@@ -147,7 +147,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader a.tar.xz 1`] = `
+exports[`ArchiveReader > a.tar.xz 1`] = `
 [
   {
     "data": "",
@@ -196,7 +196,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader bzip2.7z 1`] = `
+exports[`ArchiveReader > bzip2.7z 1`] = `
 [
   {
     "data": "",
@@ -245,7 +245,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader deflate.zip 1`] = `
+exports[`ArchiveReader > deflate.zip 1`] = `
 [
   {
     "data": "",
@@ -294,7 +294,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader deflate-encrypted.zip 1`] = `
+exports[`ArchiveReader > deflate-encrypted.zip 1`] = `
 [
   {
     "data": "",
@@ -343,7 +343,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader lzma.7z 1`] = `
+exports[`ArchiveReader > lzma.7z 1`] = `
 [
   {
     "data": "",
@@ -392,7 +392,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader lzma2.7z 1`] = `
+exports[`ArchiveReader > lzma2.7z 1`] = `
 [
   {
     "data": "",
@@ -441,7 +441,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader store.zip 1`] = `
+exports[`ArchiveReader > store.zip 1`] = `
 [
   {
     "data": "",
@@ -490,7 +490,7 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader v4.rar 1`] = `
+exports[`ArchiveReader > v4.rar 1`] = `
 [
   {
     "data": "# example
@@ -539,9 +539,9 @@ archives/example/dir/image.png
 ]
 `;
 
-exports[`ArchiveReader v4-encrypted.rar 1`] = `[]`;
+exports[`ArchiveReader > v4-encrypted.rar 1`] = `[]`;
 
-exports[`ArchiveReader v5.rar 1`] = `
+exports[`ArchiveReader > v5.rar 1`] = `
 [
   {
     "data": "# example

@@ -23,7 +23,7 @@
     "lint-fix:eslint": "npm run lint:eslint -- --fix",
     "lint-fix:package-json": "prettier-package-json --write",
     "lint-fix:prettier": "prettier --write .",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "vitest run"
   },
   "types": "dist/index.d.ts",

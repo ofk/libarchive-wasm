@@ -28,11 +28,11 @@ RUN tar xf /opt/xz-5.4.3.tar.gz && rm /opt/xz-5.4.3.tar.gz && cd /opt/xz-5.4.3 &
     emmake make && emmake make install
 
 WORKDIR /opt
-ADD https://github.com/libarchive/libarchive/releases/download/v3.6.2/libarchive-3.6.2.zip /opt
+ADD https://github.com/libarchive/libarchive/releases/download/v3.7.7/libarchive-3.7.7.zip /opt
 ENV CPPFLAGS "-I/usr/local/include"
 ENV LDLIBS "-lz -lbz2 -lssl -lcrypto"
 ENV LDFLAGS "-L/usr/local/lib"
-RUN unzip /opt/libarchive-3.6.2.zip && rm /opt/libarchive-3.6.2.zip && cd /opt/libarchive-3.6.2 && \
+RUN unzip /opt/libarchive-3.7.7.zip && rm /opt/libarchive-3.7.7.zip && cd /opt/libarchive-3.7.7 && \
     emconfigure ./configure --disable-shared --enable-static \
     --enable-bsdtar=static --enable-bsdcat=static --enable-bsdcpio=static \
     --enable-posix-regex-lib=libc --disable-xattr --disable-acl \

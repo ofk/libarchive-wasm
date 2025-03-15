@@ -7,12 +7,12 @@ interface JSTypes {
   string: string;
 }
 
-type JSTypeStrings = keyof JSTypes;
+type JSType = keyof JSTypes;
 
-type ToJSType<S> = S extends null ? null : S extends JSTypeStrings ? JSTypes[S] : unknown;
+type ReturnToType<R> = R extends null ? null : R extends JSType ? JSTypes[R] : never;
 
-type ToJSTypeArray<SA> = SA extends readonly [infer S, ...infer R]
-  ? readonly [ToJSType<S>, ...ToJSTypeArray<R>]
+type ArgsToType<SA> = SA extends readonly [infer S, ...infer R]
+  ? readonly [ReturnToType<S>, ...ArgsToType<R>]
   : readonly [];
 
 // eslint-disable-next-line import/exports-last
@@ -23,20 +23,21 @@ export interface LibarchiveModule {
 
   cwrap: <
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
-    RT extends ToJSType<RS>,
-    TA = undefined,
-    RS extends JSTypeStrings = JSTypeStrings,
-    SA extends readonly JSTypeStrings[] = readonly JSTypeStrings[],
+    RT extends ReturnToType<R>,
+    IA = undefined,
+    R extends JSType = JSType,
+    I extends readonly JSType[] = readonly JSType[],
   >(
     ident: string,
-    returnType: RS,
-    argTypes: SA,
-  ) => (...args: TA extends unknown[] ? TA : ToJSTypeArray<SA>) => RT;
+    returnType: R,
+    argTypes: I,
+  ) => (...args: IA extends unknown[] ? IA : ArgsToType<I>) => RT;
+
   HEAP8: Int8Array;
+
+  locateFile: (url: string, scriptDirectory: string) => string;
 }
 
-declare function libarchive(options?: {
-  locateFile?: (path: string, prefix: string) => string;
-}): Promise<LibarchiveModule>;
+declare function libarchive(options?: Partial<LibarchiveModule>): Promise<LibarchiveModule>;
 
 export default libarchive;

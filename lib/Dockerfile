@@ -22,8 +22,9 @@ RUN tar xf /opt/bzip2-1.0.8.tar.gz && rm /opt/bzip2-1.0.8.tar.gz && cd /opt/bzip
     make CC="emcc" bzip2 && emmake make install
 
 WORKDIR /opt
-ADD https://github.com/tukaani-project/xz/releases/download/v5.4.3/xz-5.4.3.tar.gz /opt
-RUN tar xf /opt/xz-5.4.3.tar.gz && rm /opt/xz-5.4.3.tar.gz && cd /opt/xz-5.4.3 && \
+ADD https://github.com/tukaani-project/xz/releases/download/v5.6.4/xz-5.6.4.tar.gz /opt
+RUN tar xf /opt/xz-5.6.4.tar.gz && rm /opt/xz-5.6.4.tar.gz && cd /opt/xz-5.6.4 && \
+    sed -i 's/defined(__wasm__)/0/' src/common/mythread.h && \
     emconfigure ./configure --disable-assembler --enable-threads=no --enable-static=yes --enable-symbol-versions=no && \
     emmake make && emmake make install
 

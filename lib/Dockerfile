@@ -11,8 +11,8 @@ RUN tar xf /opt/openssl-3.1.1.tar.gz && rm /opt/openssl-3.1.1.tar.gz && cd /opt/
     emmake make && emmake make install_sw
 
 WORKDIR /opt
-ADD https://github.com/madler/zlib/archive/v1.2.13.zip /opt
-RUN unzip /opt/v1.2.13.zip && rm /opt/v1.2.13.zip && cd /opt/zlib-1.2.13 && \
+ADD https://github.com/madler/zlib/archive/v1.3.1.zip /opt
+RUN unzip /opt/v1.3.1.zip && rm /opt/v1.3.1.zip && cd /opt/zlib-1.3.1 && \
     emconfigure ./configure --static && \
     emmake make && emmake make install
 

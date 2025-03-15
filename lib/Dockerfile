@@ -4,8 +4,8 @@ RUN apt-get update && \
     apt-get install -y locate file
 
 WORKDIR /opt
-ADD https://www.openssl.org/source/openssl-3.1.1.tar.gz /opt
-RUN tar xf /opt/openssl-3.1.1.tar.gz && rm /opt/openssl-3.1.1.tar.gz && cd /opt/openssl-3.1.1 && \
+ADD https://www.openssl.org/source/openssl-3.4.1.tar.gz /opt
+RUN tar xf /opt/openssl-3.4.1.tar.gz && rm /opt/openssl-3.4.1.tar.gz && cd /opt/openssl-3.4.1 && \
     emmake bash -c "./Configure no-asm no-deprecated no-dso no-ssl3 no-tests -static linux-generic32" && \
     sed -i 's/CROSS_COMPILE=\/emsdk\/upstream\/emscripten\/em/CROSS_COMPILE=/' Makefile && \
     emmake make && emmake make install_sw

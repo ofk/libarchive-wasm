@@ -15,7 +15,6 @@ type ArgsToType<SA> = SA extends readonly [infer S, ...infer R]
   ? readonly [ReturnToType<S>, ...ArgsToType<R>]
   : readonly [];
 
-// eslint-disable-next-line import/exports-last
 export interface LibarchiveModule {
   _free: (ptr: number) => void;
 

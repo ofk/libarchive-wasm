@@ -10,13 +10,5 @@ export default config({
       },
     },
   ],
-  ignores: [
-    'coverage',
-    'dist',
-    'examples',
-    'lib/build',
-    'src/__snapshots__',
-    'src/libarchive.js',
-    'node_modules',
-  ],
+  ignores: ['coverage', 'dist', 'examples', 'lib/build', 'src/__snapshots__', 'src/libarchive.js'],
 });

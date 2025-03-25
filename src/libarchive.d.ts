@@ -25,7 +25,7 @@ export interface LibarchiveModule {
     RT extends ReturnToType<R>,
     IA = undefined,
     R extends JSType = JSType,
-    I extends readonly JSType[] = readonly JSType[],
+    const I extends readonly JSType[] = readonly JSType[],
   >(
     ident: string,
     returnType: R,

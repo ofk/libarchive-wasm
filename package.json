@@ -3,8 +3,11 @@
   "version": "1.2.0",
   "description": "Extract archive files in JavaScript, libarchive port in wasm",
   "license": "MIT",
-  "author": "ofk <ofkjpn+npm@gmail.com> (https://github.com/ofk/)",
-  "repository": "ofk/libarchive-wasm",
+  "author": "ofk (https://github.com/ofk/)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofk/libarchive-wasm.git"
+  },
   "main": "dist/index.js",
   "files": [
     "dist",

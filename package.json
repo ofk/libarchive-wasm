@@ -17,15 +17,16 @@
     "prebuild": "rm -rf dist",
     "build": "tsc -p tsconfig.build.json",
     "postbuild": "cp src/*.wasm dist",
-    "lint": "run-s -c lint:*",
-    "lint:eslint": "eslint src",
-    "lint:package-json": "prettier-package-json -l",
+    "lint": "run-p lint:**",
+    "lint:eslint": "eslint .",
     "lint:prettier": "prettier --check .",
+    "lint:prettier-package-json": "prettier-package-json --list-different",
     "lint:tsc": "tsc",
-    "lint-fix": "run-s -c lint-fix:*",
-    "lint-fix:eslint": "npm run lint:eslint -- --fix",
-    "lint-fix:package-json": "prettier-package-json --write",
+    "lint-fix": "run-s lint-fix:**",
+    "lint-fix:eslint": "eslint --fix .",
     "lint-fix:prettier": "prettier --write .",
+    "lint-fix:prettier-package-json": "prettier-package-json --write",
+    "lint-fix:tsc": "run-s lint:tsc",
     "prepare": "husky",
     "prepublishOnly": "npm run build",
     "test": "vitest run"
@@ -48,8 +49,8 @@
       "prettier --write",
       "prettier-package-json --write"
     ],
-    "*.{js,jsx,mjs,cjs,json,md,html}": "prettier --write",
-    "*.{ts,tsx,mts,cts}": [
+    "*.{json,md,html}": "prettier --write",
+    "*.{js,jsx,mjs,cjs,ts,tsx,mts,cts}": [
       "prettier --write",
       "eslint --fix"
     ]

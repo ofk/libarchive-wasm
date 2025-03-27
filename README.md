@@ -1,9 +1,7 @@
 # libarchive-wasm
 
-[![Build Status](https://github.com/ofk/libarchive-wasm/actions/workflows/ci.yml/badge.svg)](https://github.com/ofk/libarchive-wasm/actions)
-[![npm version](https://badge.fury.io/js/libarchive-wasm.svg)](http://badge.fury.io/js/libarchive-wasm)
-[![npm downloads](https://img.shields.io/npm/dm/libarchive-wasm.svg?style=flat-square)](https://www.npmjs.com/package/libarchive-wasm)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](/LICENSE)
+[![npm](https://img.shields.io/npm/v/libarchive-wasm)](https://npmjs.com/package/libarchive-wasm)
+![ci](https://github.com/ofk/libarchive-wasm/actions/workflows/ci.yml/badge.svg)
 
 libarchive-wasm is a JavaScript library for reading various archive and compression formats.
 It's port of [libarchive](https://github.com/libarchive/libarchive) to WebAssembly and JavaScript wrapper to make it easier to use, since it runs performance should be near native.

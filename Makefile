@@ -6,7 +6,7 @@ build-docker:
 	docker build -t libarchive-wasm-build -f lib/Dockerfile .
 
 clean:
-	$(RM) src/libarchive.{js,wasm} lib/build/*
+	$(RM) src/libarchive.js src/libarchive.wasm lib/build/libarchive.*
 
 create-archives: archives/deflate.zip archives/deflate-encrypted.zip archives/store.zip archives/a.tar archives/a.tar.bz2 archives/a.tar.gz archives/a.tar.xz archives/bzip2.7z archives/lzma.7z archives/lzma2.7z archives/v4.rar archives/v4-encrypted.rar archives/v5.rar
 
@@ -17,7 +17,7 @@ src/libarchive.js: lib/build/libarchive.js
 	cp lib/build/libarchive.* src
 
 lib/build/libarchive.js:
-	docker run -it -v $(PWD)/lib:/workdir libarchive-wasm-build ./build.bash
+	docker run --rm -v $(CURDIR)/lib:/workdir libarchive-wasm-build ./build.bash
 
 archives/deflate.zip: archives/example
 	cd archives/ && zip -r -Z deflate deflate.zip example && cd ..

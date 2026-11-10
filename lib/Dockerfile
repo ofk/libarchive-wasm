@@ -1,11 +1,7 @@
-# syntax=docker/dockerfile:1
-FROM emscripten/emsdk:4.0.5
-
-RUN apt-get update && \
-    apt-get install -y locate file
-
-# Every source archive is pinned by SHA-256. The values were checked against
-# the upstream release signatures (or the published .sha256 for OpenSSL).
+# The toolchain image and every source archive are pinned by SHA-256.
+# The archive hashes were checked against the upstream release signatures
+# (or the published .sha256 for OpenSSL).
+FROM emscripten/emsdk:4.0.5@sha256:5aea37132ad0827908065a5d7432d2f4048011dce7169aa1ab3441b0720312e2
 
 WORKDIR /opt
 ADD --checksum=sha256:a2157c2830efdec3788939b00c9b0638306d3f0bbb76dc4832ee503bb397df98 \
@@ -43,7 +39,7 @@ ENV LDLIBS="-lz -lbz2 -lssl -lcrypto"
 ENV LDFLAGS="-L/usr/local/lib"
 RUN tar xf /opt/libarchive-3.8.11.tar.gz && rm /opt/libarchive-3.8.11.tar.gz && cd /opt/libarchive-3.8.11 && \
     emconfigure ./configure --disable-shared --enable-static \
-    --enable-bsdtar=static --enable-bsdcat=static --enable-bsdcpio=static \
+    --disable-bsdtar --disable-bsdcat --disable-bsdcpio --disable-bsdunzip \
     --enable-posix-regex-lib=libc --disable-xattr --disable-acl \
     --without-lz4 --without-lzo2 --without-cng --without-nettle --without-xml2 --without-expat && \
     emmake make && emmake make install

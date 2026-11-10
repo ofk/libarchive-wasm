@@ -8,6 +8,13 @@ describe('libarchiveWasm', () => {
     expect(mod.version_number()).toBeGreaterThanOrEqual(0);
   });
 
+  test('bundles a libarchive with the known RAR/RAR5 security fixes', async () => {
+    const mod = await libarchiveWasm();
+    // 3.8.11 includes the fixes for CVE-2025-5914, CVE-2025-5915,
+    // CVE-2026-4111, CVE-2026-4424 and CVE-2026-14164.
+    expect(mod.version_number()).toBeGreaterThanOrEqual(3_008_011);
+  });
+
   test('version_string', async () => {
     const mod = await libarchiveWasm();
     expect(mod.version_string()).toMatch(/^libarchive \d+(?:.\d+)*$/);
@@ -15,6 +22,9 @@ describe('libarchiveWasm', () => {
 
   test('version_details', async () => {
     const mod = await libarchiveWasm();
-    expect(mod.version_details()).toMatch(/^libarchive \d+(?:.\d+)*(?: \w+\/\d+(?:.\d+)*)*$/);
+    // Since 3.8 libarchive also reports "libb2/bundled" (BLAKE2, used by RAR5).
+    expect(mod.version_details()).toMatch(
+      /^libarchive \d+(?:.\d+)*(?: \w+\/(?:\d+(?:.\d+)*|bundled))*$/,
+    );
   });
 });

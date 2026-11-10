@@ -1,0 +1,43 @@
+name: wasm
+
+# Rebuilds src/libarchive.{js,wasm} from lib/Dockerfile and fails if the
+# result differs from the committed files, so the shipped binary can't drift
+# from the pinned sources.
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - lib/**
+      - src/libarchive.js
+      - src/libarchive.wasm
+      - Makefile
+      - .github/workflows/wasm.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - lib/**
+      - src/libarchive.js
+      - src/libarchive.wasm
+      - Makefile
+      - .github/workflows/wasm.yml
+
+permissions:
+  contents: read
+
+jobs:
+  reproducible-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build toolchain image
+        run: make build-docker
+      - name: Rebuild wasm
+        run: make clean && make
+      - name: Check committed wasm matches the build
+        run: |
+          sha256sum src/libarchive.js src/libarchive.wasm
+          git diff --exit-code --stat -- src/libarchive.js src/libarchive.wasm
